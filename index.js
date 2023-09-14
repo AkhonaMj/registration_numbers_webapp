@@ -6,8 +6,9 @@ import session from "express-session";
 import dotenv from "dotenv";
 dotenv.config()
 import pgPromise from "pg-promise";
-
-
+import RegistrationDb from "./services/reg_database.js";
+import Registration from "./services/registration.js";
+import RegRoutes from "./routes/regRoutes.js";
 const pgp = pgPromise();
 const app = express();
 
@@ -16,6 +17,16 @@ const exphbs = engine({
     layoutsDir: 'views/layouts'
 
 })
+
+const db = pgp({
+    connectionString: process.env.CONNECTION_STRING,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
+
+const registrationInst = Registration();
+const registrationDb = RegistrationDb(db, registrationInst)
 
 app.engine('handlebars', exphbs);
 app.set('view engine', 'handlebars');
@@ -27,11 +38,19 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+
 app.use(flash());
 
-app.get('/', function (req, res) {
-    res.render('');
-});
+
+const regRoutesInst = RegRoutes(registrationInst, registrationDb)
+
+app.get('/', regRoutesInst.home);
+
+// app.get('/reg_numbers', )
+ app.post('/filter', regRoutesInst.filterRegs)
+
+app.post('/add', regRoutesInst.add)
+app.post('/reset', regRoutesInst.reset)
 
 
 

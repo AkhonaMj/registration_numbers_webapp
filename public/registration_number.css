@@ -1,14 +1,18 @@
-
 body {
-    background-size: cover;
-    text-align: center;
-    color: black;
-    font-size:xx-large;
-    font-weight: bold;
-    text-shadow: 0.125rem 0.125rem 0.125rem white;
-    margin: 0;
-  }
+  background-color: gainsboro;
+  background-size: cover;
+  text-align: center;
+  color: black;
+  font-size: xx-large;
+  font-weight: bold;
+  text-shadow: 0.125rem 0.125rem 0.125rem white;
+  margin: 0;
+}
 
-/* .regDisplay{
 
-} */
+.regNumber {
+  background: yellow;
+  margin-bottom: auto;
+
+
+}

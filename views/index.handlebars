@@ -1,12 +1,28 @@
-<div>  
-      <form action="" method="POST">
-        <p>Registration Number:</p>
-        <label for="reg">
-            <input type="text">
-        </label>
-        <button type="submit">Add</button>
-         <p class="regDisplay"></p>
-            <p class="error"></p>
+<div>
+      <form action="/add" method="POST">
+            <p>Registration Number:</p>
+            <label for="reg">
+                  <input type="text" name="regNum" id="">
+            </label>
+            <button type="submit">Add</button>
+            <p class="error">{{message}}</p>
 
+            <label for="towns">Town:</label>
+
+            <select name="towns" id="towns">
+                  <option value=""></option>
+                  <option value="CA">Cape Town</option>
+                  <option value="CJ">Paarl</option>
+                  <option value="CAW">George</option>
+                  <option value="CL">Stellenbosch</option>
+            </select>
+            <button type="submit" formaction="/filter">Show</button>
+            <button type="submit" formaction="/reset">Reset</button>
       </form>
+
+      <div class="regDisplay">
+            {{#each regNums}}
+            <div class="regNumber">{{reg_number}}</div>
+            {{/each}}
+      </div>
 </div>
