@@ -2,7 +2,7 @@ import express from "express";
 import { engine } from "express-handlebars";
 import bodyParser from "body-parser";
 import flash from "express-flash";
-import session from "express-session";
+
 import dotenv from "dotenv";
 dotenv.config()
 import pgPromise from "pg-promise";
