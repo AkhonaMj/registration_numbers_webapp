@@ -2,17 +2,18 @@ export default function RegRoutes(registrationInst, registrationDb) {
 
     async function home(req, res) {
         var storeRegs = await registrationDb.getRegNums()
-        var filteredRegs = await registrationDb.filteredRegNums(req.flash('townCode')[0] || 'ZZ')
+        var filteredRegs = await registrationDb.filteredRegNums()
 
         res.render('index', {
-            regNums:  filterRegs || storeRegs
+            regNums: storeRegs,
+            filterRegs: filteredRegs
 
         });
     }
 
     async function registration(req, res) {
         await registrationDb.addRegNum()
-        // registrationInst.registration(req.body.towns);
+        registrationDb.filteredRegNums(req.body.towns);
 
         res.redirect('/')
     }
@@ -31,9 +32,9 @@ export default function RegRoutes(registrationInst, registrationDb) {
         await registrationDb.resetReg()
         res.redirect('/')
     }
+
     async function filterRegs(req, res) {
-      
-        req.flash('townCode', req.body.townCode)
+        await registrationDb.filteredRegNums(req.body.townCode)
         res.redirect('/')
     }
     return {

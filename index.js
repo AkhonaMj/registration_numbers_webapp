@@ -46,10 +46,10 @@ const regRoutesInst = RegRoutes(registrationInst, registrationDb)
 
 app.get('/', regRoutesInst.home);
 
-// app.get('/reg_numbers', )
- app.post('/filter', regRoutesInst.filterRegs)
+app.post('/filter', regRoutesInst.filterRegs)
 
 app.post('/add', regRoutesInst.add)
+
 app.post('/reset', regRoutesInst.reset)
 
 
