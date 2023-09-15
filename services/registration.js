@@ -32,7 +32,6 @@ export default function Registration(RegistrationDb) {
 
     function getTownCode(regNum) {
         var townCode = regNum.replace(/[^a-z]/gi, '');
-      
         return townCode
     }
 

@@ -1,19 +1,21 @@
 export default function RegRoutes(registrationInst, registrationDb) {
 
     async function home(req, res) {
-        var storeRegs = await registrationDb.getRegNums()
-        var filteredRegs = await registrationDb.filteredRegNums()
+        const errorMsg = req.flash('error')[0]
+        const filteredRegs = await registrationDb.filteredRegNums(req.flash('regByTown')[0])
+  
 
-        res.render('index', {
-            regNums: storeRegs,
-            filterRegs: filteredRegs
+            res.render('index', {
+                regNums: filteredRegs,
+                // filteredRegs: await registrationDb.filteredRegNums(req.body.townCode),
+                errorMsg
 
-        });
+            });
     }
 
     async function registration(req, res) {
         await registrationDb.addRegNum()
-        registrationDb.filteredRegNums(req.body.towns);
+        await registrationDb.filteredRegNums(req.body.townCode);
 
         res.redirect('/')
     }
@@ -34,7 +36,8 @@ export default function RegRoutes(registrationInst, registrationDb) {
     }
 
     async function filterRegs(req, res) {
-        await registrationDb.filteredRegNums(req.body.townCode)
+
+        req.flash('regByTown', req.body.townCode)
         res.redirect('/')
     }
     return {

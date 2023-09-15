@@ -1,4 +1,4 @@
-export default function RegistrationDb(db,regNumInst) {
+export default function RegistrationDb(db, regNumInst) {
 
     async function addRegNum(regNum) {
         const townCode = regNumInst.getTownCode(regNum)
@@ -8,12 +8,15 @@ export default function RegistrationDb(db,regNumInst) {
     async function getRegNums() {
         return await db.manyOrNone("SELECT reg_number FROM dev.registration");
     }
-    // async function getRegTown() {
-    //     return await db.manyOrNone("SELECT towncode FROM dev.registration");
-    // }
-    
+
     async function filteredRegNums(townCode) {
-        return await db.manyOrNone("SELECT towncode FROM dev.registration WHERE towncode = $1", [townCode]);
+        if (typeof townCode === 'string' || townCode instanceof String) {
+            return await db.manyOrNone("SELECT * FROM dev.registration WHERE towncode = $1", [townCode]);
+
+        } else {
+            return await db.manyOrNone("SELECT * FROM dev.registration");
+
+        }
     }
 
     async function existingReg(regNum) {
@@ -33,7 +36,7 @@ export default function RegistrationDb(db,regNumInst) {
         existingReg,
         resetReg,
         filteredRegNums,
-   
+
     }
 
 }
