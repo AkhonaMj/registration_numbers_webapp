@@ -6,13 +6,18 @@ body {
   font-size: xx-large;
   font-weight: bold;
   text-shadow: 0.125rem 0.125rem 0.125rem white;
-  margin: 0;
+  /* margin: 0; */
+  background-image: url("car.jpg")
 }
 
 
 .regNumber {
-  background: yellow;
-  margin-bottom: auto;
+  background: silver;
+  height: 50px;
+  width: 150px;
+  margin: auto;
+  margin-top: 10px;
 
 
+  /* background-color: #555; */
 }
