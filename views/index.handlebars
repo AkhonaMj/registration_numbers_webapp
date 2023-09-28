@@ -1,11 +1,19 @@
 <div>
       <form action="/add" method="POST">
-            <p>Registration Number:</p>
+            <p>Enter Registration Number:</p>
+            {{!-- <p class="eg">Eg: CA 1233, CF 4547, CL 3854</p> --}}
+
             <label for="reg">
                   <input type="text" name="regNum" id="">
             </label>
-            <button type="submit">Add</button>
             <p class="error">{{errorMsg}}</p>
+            <button type="submit">Add</button>
+
+               <script>
+                setTimeout(function () {
+                    document.querySelector(".error").remove();
+                }, 3000)
+            </script>
 
             <label for="towns">Town:</label>
 

@@ -10,6 +10,17 @@ body {
   background-image: url("car.jpg")
 }
 
+.error{
+  color: red;
+}
+
+
+/* 
+.regDisplay {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  gap: 10px;
+} */
 
 .regNumber {
   background: silver;
@@ -17,7 +28,6 @@ body {
   width: 150px;
   margin: auto;
   margin-top: 10px;
-
 
   /* background-color: #555; */
 }

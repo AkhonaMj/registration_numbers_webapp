@@ -16,20 +16,6 @@ export default function Registration(RegistrationDb) {
         }
     }
 
-    // function registration(townName) {
-    //     if (townName !== "") {
-    //         if (townName == "CA") {
-    //             return
-    //         } else if (townName == "CJ") {
-    //             return regNum
-    //         } else if (townName == "CAW") {
-    //             return regNum
-    //         }
-    //     } else if (townName == "CL") {
-    //         return regNum
-    //     }
-    // }
-
     function getTownCode(regNum) {
         var townCode = regNum.replace(/[^a-z]/gi, '');
         return townCode
@@ -43,7 +29,6 @@ export default function Registration(RegistrationDb) {
     return {
         validReg,
         invalidReg,
-       // registration,
         getTownCode
 
     }

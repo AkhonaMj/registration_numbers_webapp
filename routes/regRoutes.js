@@ -3,14 +3,14 @@ export default function RegRoutes(registrationInst, registrationDb) {
     async function home(req, res) {
         const errorMsg = req.flash('error')[0]
         const filteredRegs = await registrationDb.filteredRegNums(req.flash('regByTown')[0])
-  
 
-            res.render('index', {
-                regNums: filteredRegs,
-                // filteredRegs: await registrationDb.filteredRegNums(req.body.townCode),
-                errorMsg
 
-            });
+        res.render('index', {
+            regNums: filteredRegs,
+           //filteredRegs: await registrationDb.filteredRegNums(req.body.townCode),
+            errorMsg
+
+        });
     }
 
     async function registration(req, res) {
@@ -21,6 +21,9 @@ export default function RegRoutes(registrationInst, registrationDb) {
     }
     async function add(req, res) {
         var regNum = (req.body.regNum).toUpperCase().trim();
+        if (regNum == "") {
+            req.flash('error', "Registration empty!")
+        }
         if (await registrationDb.existingReg(regNum)) {
             req.flash('error', "This registration already exists!")
         }
