@@ -1,18 +1,22 @@
 export default function RegRoutes(registrationInst, registrationDb) {
 
     async function home(req, res) {
+
         const errorMsg = req.flash('error')[0];
+        //  const successMsg = req.flash('success')[0];
         const filteredRegs = await registrationDb.filteredRegNums(req.flash('regByTown')[0]);
-       // console.log(filteredRegs)
+        // console.log(filteredRegs)
         //  const regNums = await registrationDb.getRegNums();
 
 
         res.render('index', {
+            // displaying  registrations
+            filteredRegs,
 
-            // regNums,
-            filteredRegs,    
-           //filteredRegs: await registrationDb.filteredRegNums(req.body.townCode),
-            errorMsg
+            //displaying error messages
+            errorMsg,
+
+            //  successMsg
 
         });
     }
@@ -22,7 +26,7 @@ export default function RegRoutes(registrationInst, registrationDb) {
         await registrationDb.filteredRegNums(req.body.townCode);
         res.redirect('/')
     }
-    
+
     async function add(req, res) {
         var regNum = (req.body.regNum).toUpperCase().trim();
         if (regNum == "") {
@@ -31,8 +35,12 @@ export default function RegRoutes(registrationInst, registrationDb) {
         if (await registrationDb.existingReg(regNum)) {
             req.flash('error', "This registration already exists!")
         }
+        if (!registrationInst.validReg(regNum)) {
+            req.flash('error', "Enter registration from CA, CJ, CL, CF")
+        }
         else if (registrationInst.validReg(regNum)) {
             await registrationDb.addRegNum(regNum)
+            //  req.flash('success', "Registration successfully added!")
         }
         res.redirect('/')
 
@@ -41,6 +49,7 @@ export default function RegRoutes(registrationInst, registrationDb) {
         await registrationDb.resetReg()
         res.redirect('/')
     }
+
 
     async function filterRegs(req, res) {
         req.flash('regByTown', req.body.townCode)
