@@ -1,40 +1,48 @@
-export default function RegistrationDb(db, regNumInst) {
+export default function RegistrationDb(db) {
 
     async function addRegNum(regNum) {
-        const townCode = regNumInst.getTownCode(regNum)
-        console.log(regNum)
+        let townTag = regNum.slice(0,2);
+        console.log('townTag: ' + townTag);
+        let townId = await db.oneOrNone("SELECT id FROM towns_table WHERE town_code = $1",[townTag]);
+     
+        console.log('townId.id: ' + townId.id);
 
-        await db.none("INSERT INTO registration (reg_number) VALUES ($1)", [regNum]);
-       // await db.none("INSERT INTO town_code (towncode) VALUES ($1)", [townCode]);
-
+        await db.none("INSERT INTO registration (reg_number,town_id) VALUES ($1,$2)", [regNum,townId.id]);
     }
-    async function getRegNums() {
-        
+
+    async function getRegNums() { 
         return await db.manyOrNone("SELECT reg_number FROM registration");
     }
 
     async function filteredRegNums(townCode) {
-        if (typeof townCode === 'string' || townCode instanceof String) {
-            return await db.manyOrNone("SELECT * FROM town_code WHERE id = $1", [townCode]);
-
-        } else {
-            return await db.manyOrNone("SELECT * FROM town_code");
-
+        // console.log(townCode + "swewewewewe")
+        if(!townCode){
+            return getRegNums()
         }
+        let townId = await db.oneOrNone("SELECT id FROM towns_table WHERE town_code = $1",[townCode]);
+        console.log(townId);
+
+         if (typeof townCode === 'string' || townCode instanceof String) {
+            let filterReg = await db.manyOrNone("SELECT * FROM registration WHERE town_id = $1", [townId.id]);
+            console.log(filterReg);
+            return filterReg
+          }
+        // } else {
+        //     return await db.manyOrNone("SELECT * FROM towns_table");
+        // }
     }
 
     async function existingReg(regNum) {
 
         var regAvailable = await db.oneOrNone("SELECT reg_number FROM registration WHERE reg_number = $1", [regNum]);
-        return regAvailable
+        return regAvailable;
 
     }
 
     async function resetReg() {
         await db.any("DELETE FROM registration");
-        await db.any("DELETE FROM town_code");
-
     }
+    
     return {
         addRegNum,
         getRegNums,

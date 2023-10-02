@@ -1,12 +1,16 @@
 export default function RegRoutes(registrationInst, registrationDb) {
 
     async function home(req, res) {
-        const errorMsg = req.flash('error')[0]
-        const filteredRegs = await registrationDb.filteredRegNums(req.flash('regByTown')[0])
+        const errorMsg = req.flash('error')[0];
+        const filteredRegs = await registrationDb.filteredRegNums(req.flash('regByTown')[0]);
+       // console.log(filteredRegs)
+        //  const regNums = await registrationDb.getRegNums();
 
 
         res.render('index', {
-            regNums: filteredRegs,
+
+            // regNums,
+            filteredRegs,    
            //filteredRegs: await registrationDb.filteredRegNums(req.body.townCode),
             errorMsg
 
@@ -16,9 +20,9 @@ export default function RegRoutes(registrationInst, registrationDb) {
     async function registration(req, res) {
         await registrationDb.addRegNum()
         await registrationDb.filteredRegNums(req.body.townCode);
-
         res.redirect('/')
     }
+    
     async function add(req, res) {
         var regNum = (req.body.regNum).toUpperCase().trim();
         if (regNum == "") {
@@ -39,10 +43,10 @@ export default function RegRoutes(registrationInst, registrationDb) {
     }
 
     async function filterRegs(req, res) {
-
         req.flash('regByTown', req.body.townCode)
         res.redirect('/')
     }
+
     return {
         home,
         registration,

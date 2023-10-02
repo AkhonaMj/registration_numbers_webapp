@@ -1,5 +1,4 @@
 body {
-  background-color: gainsboro;
   background-size: cover;
   text-align: center;
   color: black;
@@ -9,18 +8,25 @@ body {
   /* margin: 0; */
   background-image: url("car.jpg")
 }
+#regInput {
+  margin: 10px;
+  width: 100px;
+  height: 38px;
+  
+}
 
 .error{
   color: red;
 }
 
 
-/* 
+
 .regDisplay {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 2fr;
+  grid-template-columns: 1fr 2fr 1fr 3fr;
   gap: 10px;
-} */
+}
+
 
 .regNumber {
   background: silver;
