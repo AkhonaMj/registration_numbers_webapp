@@ -16,7 +16,7 @@ describe("Registration webapp", async function () {
     const registration = RegistrationDb(db);
 
     //setting a timeout for each test case to  (5 seconds).
-    this.timeout(3000);
+    this.timeout(5000);
 
     // empting the table before each test case
     beforeEach(async function () {
@@ -31,17 +31,17 @@ describe("Registration webapp", async function () {
             const registration = RegistrationDb(db);
             const regNum = "CA 3443";
             await registration.addRegNum(regNum);
-            assert.deepEqual(await registration.getRegNums(), [{ reg_number: 'CA 3443' }]);
+            assert.deepEqual(await registration.getRegNums(),[{ reg_number: 'CA 3443' }]);
         });
     });
 
-    describe("", async function () {
+    describe("Handling duplicates", async function () {
         it("should not add existing registration numbers", async function () {
             const registration = RegistrationDb(db);
             await registration.addRegNum("CA 745-564");
             await registration.addRegNum("CA 745-564");
             await registration.addRegNum("CA 3443");
-            assert.deepEqual(await registration.getRegNums(), [{ reg_number: 'CA 745-564' }, { reg_number: 'CA 3443' }])
+            assert.deepEqual(await registration.getRegNums(),[{ reg_number: 'CA 745-564' }, { reg_number: 'CA 3443' }])
 
         });
     })
@@ -53,14 +53,28 @@ describe("Registration webapp", async function () {
             await registration.addRegNum("CL 228-384");
             await registration.addRegNum("CA 3534");
             await registration.addRegNum("CF 1234");
-
-            assert.deepEqual(await registration.filteredRegNums("CL"), [{ id: 2, reg_number: "CL 228-384", town_id: 3 }],)
+        
+            assert.deepEqual( await registration.filteredRegNums("CL"), [{ id: 2, reg_number: "CL 228-384", town_id: 3 }],)
 
 
         })
 
     });
 
+    describe("resetReg", async function () {
+        it("should be able to clear registration numbers", async function () {
+            const registration = RegistrationDb(db);
+            await registration.addRegNum("CA 3443");
+            await registration.addRegNum("CA 1234");
+            await registration.addRegNum("CL 228-384");
+            await registration.addRegNum("CA 3534");
+            await registration.addRegNum("CF 1234");
+            await registration.resetReg();
+            assert.deepEqual(await registration.getRegNums(), [])
+
+
+        });
+    });
 
 
 
