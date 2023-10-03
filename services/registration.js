@@ -2,7 +2,7 @@ export default function Registration(RegistrationDb) {
 
     function validReg(regNum) {
 
-        const validRegex = /^(CA|CL|CJ|CF)\s?\d{1,3}\s?\d{1,3}$/i
+        const validRegex =/^(CA|CL|CJ|CF)\s?\d{1,3}(\s?|-)\d{1,3}$/i
         if (regNum == "") {
             return false
         } else if (regNum.length > 11) {

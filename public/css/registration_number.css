@@ -5,8 +5,7 @@ body {
   font-size: xx-large;
   font-weight: bold;
   text-shadow: 0.125rem 0.125rem 0.125rem white;
-  /* margin: 0; */
-  background-image: url("car.jpg")
+  background-image: url("../images/car.jpg")
 }
 
 /* #regInput {
@@ -15,12 +14,12 @@ body {
   height: 70px;
 
 } */
-input{
+input {
   margin: 10px;
   width: 200px;
   height: 40px;
   border-radius: 8px;
- border-color: black;
+  border-color: black;
 
 }
 
@@ -52,6 +51,10 @@ input{
   margin: auto;
   margin-top: 10px;
   border-radius: 10px;
+  line-height: 24px;
+  width: fit-content;
+  display: inline-block;
+  padding: 10px 20px 10px ;
 
   /* background-color: #555; */
 }
@@ -66,9 +69,49 @@ button {
   text-align: center;
   line-height: 5px;
   height: 40px;
-   width: fit-content;
+  width: fit-content;
   display: inline-block;
   font-size: 16px;
   margin-top: 10px;
 }
 
+/* @media (max-width:400px) {
+  .regNumber {
+    flex-direction: column;
+      display: flex;
+    }
+    .regDisplay{
+      flex-direction: column;
+        display: flex;
+      }
+      
+      h1{
+        flex-direction: column;
+        display: flex;
+      }
+  } */
+@media (max-width:970px) {
+  body {
+    flex-direction: column;
+    text-align: center;
+    line-height: 40px;
+    width: fit-content;
+    display: inline-block;
+
+  }
+
+  .regNumber {
+    flex-direction: column;
+    text-align: center;
+    line-height: 40px;
+    width: fit-content;
+    display: flex;
+  }
+
+  .regDisplay{
+    flex-direction: column;
+      display: flex;
+      line-height: 40px;
+    }
+
+}

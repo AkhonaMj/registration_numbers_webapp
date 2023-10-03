@@ -16,7 +16,7 @@ export default function RegRoutes(registrationInst, registrationDb) {
             //displaying error messages
             errorMsg,
 
-            //  successMsg
+
 
         });
     }
@@ -33,6 +33,7 @@ export default function RegRoutes(registrationInst, registrationDb) {
             req.flash('error', "Registration empty!")
         }
         if (await registrationDb.existingReg(regNum)) {
+            !registrationDb.addRegNum(regNum)
             req.flash('error', "This registration already exists!")
         }
         if (!registrationInst.validReg(regNum)) {
@@ -44,6 +45,10 @@ export default function RegRoutes(registrationInst, registrationDb) {
         }
         res.redirect('/')
 
+    }
+    async function showAll(req, res) {
+        await registrationDb.getRegNums();
+        res.redirect('/')
     }
     async function reset(req, res) {
         await registrationDb.resetReg()
@@ -61,6 +66,7 @@ export default function RegRoutes(registrationInst, registrationDb) {
         registration,
         add,
         reset,
-        filterRegs
+        filterRegs,
+        showAll
     }
 }

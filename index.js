@@ -51,7 +51,7 @@ app.post('/filter', regRoutesInst.filterRegs);
 app.post('/add', regRoutesInst.add);
 
 app.post('/reset', regRoutesInst.reset);
-
+app.post('display', regRoutesInst.showAll);
 
 
 const PORT = process.env.PORT || 3001;
