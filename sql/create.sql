@@ -16,6 +16,6 @@ CREATE TABLE towns_table (
 
 CREATE TABLE registration (
     id serial PRIMARY KEY,
-    reg_number VARCHAR(11) NOT NULL,
+    reg_number VARCHAR(11) NOT NULL UNIQUE,
     town_id int REFERENCES towns_table(id) ON DELETE CASCADE
 );
