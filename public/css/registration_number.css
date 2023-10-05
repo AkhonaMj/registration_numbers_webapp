@@ -5,23 +5,30 @@ body {
   font-size: xx-large;
   font-weight: bold;
   text-shadow: 0.125rem 0.125rem 0.125rem white;
-  background-image: url("../images/car.jpg")
+  background-image: url("../images/car.jpg");
+
+
 }
 
-/* #regInput {
-  margin: 10px;
-  width: 100px;
-  height: 70px;
 
-} */
-input {
-  margin: 10px;
-  width: 200px;
+input,
+select {
+  width: 260px;
   height: 40px;
+  border-width: 2px;
   border-radius: 8px;
   border-color: black;
+  text-align: center;
+  padding: 0;
+  outline: 0;
+
 
 }
+
+input::placeholder, select {
+  font: 1.25rem/3 sans-serif;
+}
+
 
 .regEg {
   text-align: center;
@@ -39,24 +46,24 @@ input {
 .regDisplay {
   padding-top: 30px;
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 3fr;
+  grid-template-columns:repeat(4, 20%);
+  grid-template-rows: 1fr ;
   gap: 10px;
+  width: 100vw;
+ justify-content: center;
+ justify-content: space-between;
+ grid-row-gap: 40px;
+ 
 }
 
 
 .regNumber {
   background: silver;
-  height: 50px;
-  width: 150px;
-  margin: auto;
-  margin-top: 10px;
   border-radius: 10px;
-  line-height: 24px;
-  width: fit-content;
-  display: inline-block;
-  padding: 10px 20px 10px ;
-
-  /* background-color: #555; */
+  border-color: black;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  margin: 0 auto;
 }
 
 button {
@@ -68,28 +75,13 @@ button {
   padding: 15px 32px;
   text-align: center;
   line-height: 5px;
-  height: 40px;
-  width: fit-content;
-  display: inline-block;
+  width: 135px;
   font-size: 16px;
-  margin-top: 10px;
+  text-align: center;
+
 }
 
-/* @media (max-width:400px) {
-  .regNumber {
-    flex-direction: column;
-      display: flex;
-    }
-    .regDisplay{
-      flex-direction: column;
-        display: flex;
-      }
-      
-      h1{
-        flex-direction: column;
-        display: flex;
-      }
-  } */
+
 @media (max-width:970px) {
   body {
     flex-direction: column;
@@ -108,10 +100,10 @@ button {
     display: flex;
   }
 
-  .regDisplay{
+  .regDisplay {
     flex-direction: column;
-      display: flex;
-      line-height: 40px;
-    }
+    display: flex;
+    line-height: 40px;
+  }
 
 }

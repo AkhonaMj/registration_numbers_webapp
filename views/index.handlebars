@@ -1,52 +1,44 @@
 <div>
+      <script>
+            setTimeout(function () {
+                  document.querySelector(".error").remove();
+            }, 3000)
+      </script>
+
+      <h1>Registrations</h1>
+
+      <p class="regEg">Enter a registration from Cape Town(CA), Paarl(CJ), Stellenbosch(CL), Kuilsriver(CF)</p>
+
+      <p class="error">{{errorMsg}}</p>
+
+
+
       <form action="/add" method="POST">
-            <h1>Registrations</h1>
-
-            <p class="regEg">Enter a registration from Cape Town(CA), Paarl(CJ), Stellenbosch(CL), Kuilsriver(CF)
-            </p>
-
-            <p class="error">{{errorMsg}}</p>
-            <script>
-                  setTimeout(function () {
-                        document.querySelector(".error").remove();
-                  }, 3000)
-            </script>
-
-            {{!-- <p class="success">{{successMsg}}</p>
-            <script>
-                  setTimeout(function () {
-                        document.querySelector(".success").remove();
-                  }, 3000)
-            </script> --}}
-
-            <div>
-                  <label for="reg">
-                        <input type="text" name="regNum">
-                  </label>
+            <input type="text" name="regNum" placeholder="Enter Registration number">
 
 
-                  <button type="submit">Add</button>
-                  <button type="submit" formaction="/reset"
-                        onclick="return confirm('Are you sure you want to reset?')">Reset</button>
-            </div>
+            <button type="submit">Add</button>
+            <button type="submit" formaction="/reset"
+                  onclick="return confirm('Are you sure you want to reset?')">Reset</button>
+      </form>
 
 
 
-</div>
 
-<div class="drop">
-      <label for="towns">Town:</label>
 
-      <select name="townCode" id="towns">
-            <option value=""></option>
-            <option value="CA">Cape Town</option>
-            <option value="CJ">Paarl</option>
-            <option value="CF">Kuilsriver</option>
-            <option value="CL">Stellenbosch</option>
-      </select>
+      {{!-- <label for="towns">Town:</label> --}}
+      <form>
+            <select name="townCode" id="towns">
+                  <option value="" disabled selected>Select Town</option>
+                  <option value="CA">Cape Town</option>
+                  <option value="CJ">Paarl</option>
+                  <option value="CF">Kuilsriver</option>
+                  <option value="CL">Stellenbosch</option>
+            </select>
 
-      <button type="submit" formaction="/filter">Show</button>
-       <button type="submit" formaction="/filter">Show All</button>
+            <button type="submit" formaction="/filter">Show</button>
+            <button type="submit" formaction="/filter">Show All</button>
+      </form>
 
       <div class="regDisplay">
             {{#each filteredRegs}}
