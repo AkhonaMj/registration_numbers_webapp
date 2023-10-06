@@ -42,6 +42,14 @@ input::placeholder, select {
   color: red;
 }
 
+.success{
+color: green;
+background-color: aliceblue;
+width: fit-content;
+text-align: center;
+margin: 0 auto;
+}
+
 
 .regDisplay {
   padding-top: 30px;

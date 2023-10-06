@@ -33,7 +33,27 @@ describe("Registration webapp", async function () {
             await registration.addRegNum(regNum);
             assert.deepEqual(await registration.getRegNums(),[{ reg_number: 'CA 3443' }]);
         });
+
+        it("should not be able to add registration numbers that are not from CA,CF,CL,CJ ", async function () {
+            const registration = RegistrationDb(db);
+            const regNum = "CEF 3443";
+            await registration.addRegNum(regNum);
+            assert.deepEqual(await registration.getRegNums(),[]);
+        });
+        it("should not add registration numbers with characters greater than 11", async function () {
+            const registration = RegistrationDb(db);
+            const regNum = "CEF 34877455543";
+            await registration.addRegNum(regNum);
+            assert.deepEqual(await registration.getRegNums(),[]);
+        });
+        it("should not add registration numbers with that have special charecters", async function () {
+            const registration = RegistrationDb(db);
+            const regNum = "CE @5543";
+            await registration.addRegNum(regNum);
+            assert.deepEqual(await registration.getRegNums(),[]);
+        });
     });
+
 
     describe("Handling duplicates", async function () {
         it("should not add existing registration numbers", async function () {
@@ -75,7 +95,6 @@ describe("Registration webapp", async function () {
 
         });
     });
-
 
 
 });

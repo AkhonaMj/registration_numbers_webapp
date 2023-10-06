@@ -5,6 +5,7 @@ export default function RegRoutes(registrationInst, registrationDb) {
         const errorMsg = req.flash('error')[0];
         //  const successMsg = req.flash('success')[0];
         const filteredRegs = await registrationDb.filteredRegNums(req.flash('regByTown')[0]);
+        const successMsg = req.flash('success')[0];
         // console.log(filteredRegs)
         //  const regNums = await registrationDb.getRegNums();
 
@@ -15,6 +16,8 @@ export default function RegRoutes(registrationInst, registrationDb) {
 
             //displaying error messages
             errorMsg,
+
+            successMsg
 
 
 
@@ -52,6 +55,7 @@ export default function RegRoutes(registrationInst, registrationDb) {
     }
     async function reset(req, res) {
         await registrationDb.resetReg()
+        req.flash('success', 'Registrations cleared successfully!')
         res.redirect('/')
     }
 
