@@ -3,11 +3,9 @@ export default function RegRoutes(registrationInst, registrationDb) {
     async function home(req, res) {
 
         const errorMsg = req.flash('error')[0];
-        //  const successMsg = req.flash('success')[0];
         const filteredRegs = await registrationDb.filteredRegNums(req.flash('regByTown')[0]);
         const successMsg = req.flash('success')[0];
-        // console.log(filteredRegs)
-        //  const regNums = await registrationDb.getRegNums();
+      
 
 
         res.render('index', {
