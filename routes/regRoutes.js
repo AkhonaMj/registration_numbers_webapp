@@ -41,7 +41,6 @@ export default function RegRoutes(registrationInst, registrationDb) {
         }
         else if (registrationInst.validReg(regNum)) {
             await registrationDb.addRegNum(regNum)
-            // return req.flash('success', "Registration successfully added!")
         }
         res.redirect('/')
 
