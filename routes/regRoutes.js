@@ -23,7 +23,6 @@ export default function RegRoutes(registrationInst, registrationDb) {
     }
 
     async function registration(req, res) {
-        await registrationDb.addRegNum()
         await registrationDb.filteredRegNums(req.body.townCode);
         res.redirect('/')
     }
